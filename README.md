@@ -7,7 +7,7 @@ You play as a tank and fight other tanks. You do this in a open world. There are
 Rules
 There are two teams
 All Players start with the same amount of ammo and health
-Every time a player gets they lose health
+Every time a player gets hit they lose health
 Last player standing wins
 Terrain
 Mostly flat landscape with some hills and dips and mountains trapping players inside the area
