@@ -18,15 +18,10 @@ void ATankPlayerController::BeginPlay()
   }
 }
 
-void ATankPlayerController::Tick( float DeltaTime )
+void ATankPlayerController::Tick( float DeltaTime ) // Called every frame
 {
   Super::Tick( DeltaTime );
   AimTowardsCrossHair();
-}
-
-ATank* ATankPlayerController::GetControlledTank() const
-{
-  return Cast<ATank>(GetPawn());
 }
 
 void ATankPlayerController::AimTowardsCrossHair()
@@ -56,7 +51,7 @@ bool ATankPlayerController::GetSightRayHitLocation( FVector& OutHitLocation ) co
   return true;
 }
 
-bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const
+bool ATankPlayerController::GetLookDirection( FVector2D ScreenLocation, FVector& LookDirection ) const
 {
   FVector CameraWorldLocation; // To Be Discarded
   return DeprojectScreenPositionToWorld(
@@ -67,7 +62,7 @@ bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& 
   );
 }
 
-bool ATankPlayerController::GetVectorHitLocation(FVector LookDirection, FVector& OutHitLocation) const
+bool ATankPlayerController::GetVectorHitLocation( FVector LookDirection, FVector& OutHitLocation ) const
 {
   FHitResult HitResult;
   auto StartLocation = PlayerCameraManager->GetCameraLocation();
@@ -84,4 +79,9 @@ bool ATankPlayerController::GetVectorHitLocation(FVector LookDirection, FVector&
   }
   OutHitLocation = FVector(0);
   return false;
+}
+
+ATank* ATankPlayerController::GetControlledTank() const
+{
+  return Cast<ATank>(GetPawn());
 }
