@@ -21,6 +21,9 @@ public:
 
   void AimAt(FVector HitLocation);
 
+  UFUNCTION(BlueprintCallable, Category = Input)
+  void FireGun();
+
   UFUNCTION(BlueprintCallable, Category = Setup)
   void SetBarrelReferance(UTankBarrel* BarrelToSet);
 
