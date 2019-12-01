@@ -2,13 +2,22 @@
 
 
 #include "Projectile.h"
+#include "GameFramework/ProjectileMovementComponent.h"
 
 // Sets default values
 AProjectile::AProjectile()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+  ProjectialMovement = CreateAbstractDefaultSubobject<UProjectileMovementComponent>(FName("ProjectialMovement"));
+  ProjectialMovement->bAutoActivate = false;
+}
 
+void AProjectile::LaunchProjectile(float Speed)
+{
+  UE_LOG(LogTemp, Log, TEXT("LaunchSpeed is : %f"), Speed)
+  ProjectialMovement->SetVelocityInLocalSpace(FVector::ForwardVector * Speed);
+  ProjectialMovement->Activate();
 }
 
 // Called when the game starts or when spawned
@@ -24,4 +33,3 @@ void AProjectile::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 }
-
