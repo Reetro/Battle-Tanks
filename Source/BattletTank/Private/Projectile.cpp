@@ -15,7 +15,6 @@ AProjectile::AProjectile()
 
 void AProjectile::LaunchProjectile(float Speed)
 {
-  UE_LOG(LogTemp, Log, TEXT("LaunchSpeed is : %f"), Speed)
   ProjectialMovement->SetVelocityInLocalSpace(FVector::ForwardVector * Speed);
   ProjectialMovement->Activate();
 }
