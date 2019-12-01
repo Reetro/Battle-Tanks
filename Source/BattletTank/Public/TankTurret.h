@@ -7,7 +7,7 @@
 #include "TankTurret.generated.h"
 
 /**
- * 
+ * TankTurret is used to rotate the tanks turret in direction of mouse. Also used to set the speed it can roate.
  */
 UCLASS(meta = (BlueprintSpawnableComponent), hidecategories = ("Collision"))
 class BATTLETTANK_API UTankTurret : public UStaticMeshComponent

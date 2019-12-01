@@ -8,7 +8,7 @@
 #include "TankBarrel.generated.h"
 
 /**
- * 
+ * TankBarrel is ued to Elevate the barrel and control how far it can up and down. It also controls the speed it can move.
  */
 UCLASS( meta = (BlueprintSpawnableComponent), hidecategories = ("Collision"))
 class BATTLETTANK_API UTankBarrel : public UStaticMeshComponent
