@@ -6,21 +6,20 @@
 
 void UTankMovementComponent::Initialize(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet)
 {
-  if (!LeftTrackToSet || !RightTrackToSet) { return; }
-
   LeftTrack = LeftTrackToSet;
   RightTrack = RightTrackToSet;
 }
 
 void UTankMovementComponent::IntendMoveFoward(float Throw)
 {
+  if (!LeftTrack || !RightTrack) { return; }
   LeftTrack->SetThrottle(Throw);
   RightTrack->SetThrottle(Throw);
 }
 
 void UTankMovementComponent::IntendTurn(float Throw)
 {
-  UE_LOG(LogTemp, Log, TEXT("Throw: %f"), Throw)
+  if (!LeftTrack || !RightTrack) { return; }
   LeftTrack->SetThrottle(Throw);
   RightTrack->SetThrottle(Throw);
 }
