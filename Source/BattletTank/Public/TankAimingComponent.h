@@ -5,8 +5,19 @@
 #include "CoreMinimal.h"
 #include "Kismet/GameplayStatics.h"
 #include "Components/ActorComponent.h"
+#include "UObject/Class.h"
 #include "GameFramework/Actor.h"
 #include "TankAimingComponent.generated.h"
+
+// Fire State Enum
+UENUM()
+enum class EFiringState : uint8
+{
+  Locked,
+  Aiming,
+  Reloading
+};
+
 
 class UTankBarrel;
 class UTankTurret;
@@ -25,6 +36,10 @@ public:
   void SetBarrelReferance(UTankBarrel* BarrelToSet);
 
   void SetTurretReferance(UTankTurret* TurretToSet);
+
+protected:
+  UPROPERTY(BlueprintReadOnly, Category = State)
+  EFiringState FiringState = EFiringState::Reloading;
 
 private:
   UTankBarrel* Barrel = nullptr;
