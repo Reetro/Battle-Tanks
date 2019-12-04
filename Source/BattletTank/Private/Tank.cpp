@@ -17,12 +17,8 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
-}
 
-// Called to bind functionality to input
-void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
+  TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
 }
 
 void ATank::AimAt(FVector HitLocation)
@@ -47,4 +43,10 @@ void ATank::FireGun()
     Projectile->LaunchProjectile(LaunchSpeed);
     LastFireTime = FPlatformTime::Seconds();
   }
+}
+
+// Called to bind functionality to input
+void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+{
+  Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
