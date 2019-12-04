@@ -25,12 +25,6 @@ public:
   UFUNCTION(BlueprintCallable, Category = Input)
   void FireGun();
 
-  UFUNCTION(BlueprintCallable, Category = Setup)
-  void SetBarrelReferance(UTankBarrel* BarrelToSet);
-
-  UFUNCTION(BlueprintCallable, Category = Setup)
-  void SetTurretReferance(UTankTurret* TurretToSet);
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -54,5 +48,5 @@ private:
   UPROPERTY(EditDefaultsOnly, Category = Setup)
   TSubclassOf<AProjectile> ProjectileBlueprint;
 
-  UTankBarrel* Barrel = nullptr;
+  UTankBarrel* Barrel = nullptr; // TODO Remove
 };
