@@ -18,12 +18,12 @@ void ATankAIController::Tick(float DeltaTime)
   // Get Current Tank
   auto ControlledTank = Cast<ATank>(GetPawn());
 
-  if (PlayerTank)
+  if (ensure(PlayerTank))
   {
     // TODO Move to Player
     MoveToActor(PlayerTank, AcceptanceRadius); // TODO check radius is in cm
     // Aim At Player
     ControlledTank->AimAt(PlayerTank->GetActorLocation());
     ControlledTank->FireGun();
-  }
+  }   
 }
