@@ -7,7 +7,7 @@
 void ATankPlayerController::BeginPlay()
 {
   Super::BeginPlay();
-  auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+  auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
   if (!ensure(AimingComponent)) { return; }
   FoundAimingComponent(AimingComponent);
 }
@@ -20,13 +20,13 @@ void ATankPlayerController::Tick( float DeltaTime ) // Called every frame
 
 void ATankPlayerController::AimTowardsCrossHair()
 {
-  if (!ensure(GetControlledTank())) { return; }
-
+  auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
+  if (!ensure(AimingComponent)) { return; }
   FVector OutHitLocation; // Out Parameter
 
   if (GetSightRayHitLocation(OutHitLocation))
   {
-    GetControlledTank()->AimAt(OutHitLocation);
+    AimingComponent->AimAt(OutHitLocation);
   }
 }
 
@@ -73,9 +73,4 @@ bool ATankPlayerController::GetVectorHitLocation( FVector LookDirection, FVector
   }
   OutHitLocation = FVector(0);
   return false; // Linetrace hit nothing
-}
-
-ATank* ATankPlayerController::GetControlledTank() const
-{
-  return Cast<ATank>(GetPawn());
 }
