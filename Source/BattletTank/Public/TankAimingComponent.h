@@ -59,4 +59,12 @@ private:
   float LaunchSpeed = 4000;
 
   void MoveBarrelTowards(FVector AimDirection);
+
+  virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+  virtual void BeginPlay() override;
+
+  FVector AimDirection;
+
+  bool bIsBarrelMoving();
 };

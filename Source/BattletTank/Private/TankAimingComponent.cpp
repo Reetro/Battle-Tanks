@@ -21,6 +21,29 @@ void UTankAimingComponent::Initialize(UTankBarrel* BarrelToSet, UTankTurret* Tur
   Turret = TurretToSet;
 }
 
+
+void UTankAimingComponent::BeginPlay()
+{
+  // Prevents firing as soon as the game starts
+  LastFireTime = FPlatformTime::Seconds();
+}
+
+void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+{
+  if ((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeInSeconds)
+  {
+    FiringState = EFiringState::Reloading;
+  }
+  else if (bIsBarrelMoving())
+  {
+    FiringState = EFiringState::Aiming;
+  }
+  else
+  {
+    FiringState = EFiringState::Locked;
+  }
+}
+
 void UTankAimingComponent::AimAt(FVector HitLocation)
 {
   if (!ensure(Barrel)) { return; }
@@ -43,19 +66,17 @@ void UTankAimingComponent::AimAt(FVector HitLocation)
   // Calcuate OutLaunchVelocity
   if (bHaveAimSolution)
   {
-    auto AimDirection = OutLaunchVelocity.GetSafeNormal();
+    AimDirection = OutLaunchVelocity.GetSafeNormal();
     MoveBarrelTowards(AimDirection);
   }
 }
 
 void UTankAimingComponent::FireGun()
 {
-  if (!ensure(Barrel && ProjectileBlueprint)) { return; }
-
-  bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
-
-  if (isReloaded)
+  if (FiringState != EFiringState::Reloading)
   {
+    if (!ensure(Barrel)) { return; }
+    if (!ensure(ProjectileBlueprint)) { return; }
     auto Projectile = GetWorld()->SpawnActor<AProjectile>(
       ProjectileBlueprint,
       Barrel->GetSocketLocation(FName("Projectile")),
@@ -66,7 +87,6 @@ void UTankAimingComponent::FireGun()
   }
 }
 
-
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
   if (!ensure(Barrel && Turret)) { return; }
@@ -76,4 +96,11 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 
   Barrel->Elevate(DeltaRotator.Pitch);
   Turret->Rotate(DeltaRotator.Yaw);
+}
+
+bool UTankAimingComponent::bIsBarrelMoving()
+{
+  if (!ensure(Barrel)) { return false; }
+  auto BarrelFoward = Barrel->GetForwardVector();
+  return !BarrelFoward.Equals(AimDirection, 0.01);
 }
