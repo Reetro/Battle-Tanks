@@ -20,6 +20,7 @@ void ATankPlayerController::Tick( float DeltaTime ) // Called every frame
 
 void ATankPlayerController::AimTowardsCrossHair()
 {
+  if (!GetPawn()) { return; } // if not possessing a tank return
   auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
   if (!ensure(AimingComponent)) { return; }
   FVector OutHitLocation; // Out Parameter
