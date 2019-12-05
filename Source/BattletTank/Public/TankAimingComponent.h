@@ -52,7 +52,7 @@ private:
 
   double LastFireTime = 0;
 
-  UPROPERTY(EditDefaultsOnly, Category = Setup)
+  UPROPERTY(EditDefaultsOnly, Category = Firing)
   TSubclassOf<AProjectile> ProjectileBlueprint;
 
   UPROPERTY(EditDefaultsOnly, Category = Firing)
