@@ -113,3 +113,8 @@ bool UTankAimingComponent::bIsBarrelMoving()
   auto BarrelFoward = Barrel->GetForwardVector();
   return !BarrelFoward.Equals(AimDirection, 0.01);
 }
+
+EFiringState UTankAimingComponent::GetFiringState() const
+{
+  return FiringState;
+}
