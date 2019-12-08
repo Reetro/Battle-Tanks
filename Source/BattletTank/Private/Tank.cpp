@@ -36,3 +36,8 @@ float ATank::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AControll
 
   return DamageToApply;
 }
+
+float ATank::GetHealthPercent() const
+{
+  return (float)CurrentHealth / (float)StartingHealth;
+}
