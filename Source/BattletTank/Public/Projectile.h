@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "TimerManager.h"
+#include "Kismet/GameplayStatics.h"
+#include "GameFramework/DamageType.h"
 #include "Projectile.generated.h"
 
 class UProjectileMovementComponent;
@@ -36,6 +38,9 @@ private:
 
   UPROPERTY(EditDefaultsOnly, Category = Collision)
   float DespawnDelay = 10;
+
+  UPROPERTY(EditDefaultsOnly, Category = Collision)
+  float DamageToApply = 10;
 
   UPROPERTY(VisibleAnywhere, Category = Effects)
   UParticleSystemComponent* LaunchBlast = nullptr;
