@@ -46,9 +46,23 @@ void AProjectile::BeginPlay()
   CollisionMesh->OnComponentHit.AddDynamic(this, &AProjectile::OnHit);
 }
 
+
 void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit)
 {
   LaunchBlast->Deactivate();
   ImpactBlast->Activate();
   ExplosionForce->FireImpulse();
+
+  SetRootComponent(ImpactBlast);
+  CollisionMesh->DestroyComponent();
+
+  UWorld* World = GetWorld();
+
+  FTimerHandle Timer;
+  World->GetTimerManager().SetTimer(Timer, this, &AProjectile::OnTimerFinish, DespawnDelay, false);
+}
+
+void AProjectile::OnTimerFinish()
+{
+  Destroy();
 }

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "TimerManager.h"
 #include "Projectile.generated.h"
 
 class UProjectileMovementComponent;
@@ -33,6 +34,9 @@ private:
   UPROPERTY(VisibleAnywhere, Category = Collision)
   UStaticMeshComponent* CollisionMesh = nullptr;
 
+  UPROPERTY(EditDefaultsOnly, Category = Collision)
+  float DespawnDelay = 10;
+
   UPROPERTY(VisibleAnywhere, Category = Effects)
   UParticleSystemComponent* LaunchBlast = nullptr;
 
@@ -41,6 +45,8 @@ private:
 
   UPROPERTY(VisibleAnywhere, Category = Effects)
   URadialForceComponent* ExplosionForce = nullptr;
+
+  void OnTimerFinish();
 
   UFUNCTION()
   void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
