@@ -31,6 +31,24 @@ void ATankPlayerController::AimTowardsCrossHair()
   }
 }
 
+void ATankPlayerController::SetPawn(APawn* InPawn)
+{
+  Super::SetPawn(InPawn);
+
+  if (InPawn)
+  {
+    auto PossessedTank = Cast<ATank>(InPawn);
+    if (!ensure(PossessedTank)) { return; }
+
+    PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankPlayerController::OnPossedTankDeath);
+  }
+}
+
+void ATankPlayerController::OnPossedTankDeath()
+{
+  UE_LOG(LogTemp, Log, TEXT("Man You So Dead"))
+}
+
 bool ATankPlayerController::GetSightRayHitLocation( FVector& OutHitLocation ) const
 {
   // Find postion of crosshair

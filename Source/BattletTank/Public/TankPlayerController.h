@@ -30,6 +30,8 @@ protected:
 
 private:
 
+  virtual void SetPawn(APawn* InPawn) override;
+
   bool GetSightRayHitLocation( FVector& OutHitLocation ) const;
 
   void AimTowardsCrossHair(); // Move the tanks barrel to where the crosshair intersects the world
@@ -40,6 +42,9 @@ private:
   float CrossHairYLocation = 0.3333;
   UPROPERTY(EditDefaultsOnly)
   float LineTraceRange = 1000000;
+
+  UFUNCTION()
+  void OnPossedTankDeath();
 
   bool GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const;
 
