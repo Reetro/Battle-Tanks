@@ -46,7 +46,7 @@ void ATankPlayerController::SetPawn(APawn* InPawn)
 
 void ATankPlayerController::OnPossedTankDeath()
 {
-  UE_LOG(LogTemp, Log, TEXT("Man You So Dead"))
+  StartSpectatingOnly();
 }
 
 bool ATankPlayerController::GetSightRayHitLocation( FVector& OutHitLocation ) const
