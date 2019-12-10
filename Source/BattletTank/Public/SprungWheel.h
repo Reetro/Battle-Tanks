@@ -30,8 +30,7 @@ public:
 
 private:
 
-  UPROPERTY(VisibleAnywhere, Category = Components)
-  UStaticMeshComponent* Mass = nullptr;
+  void SetUpConstrant();
 
   UPROPERTY(VisibleAnywhere, Category = Components)
   UStaticMeshComponent* Wheel = nullptr;
