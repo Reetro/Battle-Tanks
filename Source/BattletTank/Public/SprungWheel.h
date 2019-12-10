@@ -7,7 +7,7 @@
 #include "SprungWheel.generated.h"
 
 class UPhysicsConstraintComponent;
-class UStaticMeshComponent;
+class USphereComponent;
 
 
 UCLASS()
@@ -33,9 +33,14 @@ private:
   void SetUpConstrant();
 
   UPROPERTY(VisibleAnywhere, Category = Components)
-  UStaticMeshComponent* Wheel = nullptr;
+  USphereComponent* Wheel = nullptr;
+
+  UPROPERTY(VisibleAnywhere, Category = "Components")
+  USphereComponent* Axle = nullptr;
 
   UPROPERTY(VisibleAnywhere, Category = Components)
-  UPhysicsConstraintComponent* PhysicsConstraint = nullptr;
+  UPhysicsConstraintComponent* MassWheelConstraint = nullptr;
 
+  UPROPERTY(VisibleAnywhere, Category = "Components")
+  UPhysicsConstraintComponent* AxleWheelConstraint = nullptr;
 };
