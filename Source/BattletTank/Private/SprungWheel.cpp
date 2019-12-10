@@ -30,15 +30,12 @@ void ASprungWheel::BeginPlay()
 	Super::BeginPlay();
 
   SetUpConstrant();
-
-
 }
 
 // Called every frame
 void ASprungWheel::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 void ASprungWheel::SetUpConstrant()
@@ -52,3 +49,7 @@ void ASprungWheel::SetUpConstrant()
   AxleWheelConstraint->SetConstrainedComponents(Axle, NAME_None, Wheel, NAME_None);
 }
 
+void ASprungWheel::AddDrivingForce(float ForceMagnitude)
+{
+  Wheel->AddForce(Axle->GetForwardVector() * ForceMagnitude);
+}

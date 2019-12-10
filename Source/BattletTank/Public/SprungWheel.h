@@ -15,18 +15,19 @@ class BATTLETTANK_API ASprungWheel : public AActor
 {
 	GENERATED_BODY()
 	
-public:	
-	// Sets default values for this actor's properties
-	ASprungWheel();
+public:
+  // Called every frame
+  virtual void Tick(float DeltaTime) override;
+
+  // Sets default values for this actor's properties
+  ASprungWheel();
+
+  void AddDrivingForce(float ForceMagnitude);
+
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
 
 private:
 
